@@ -3,10 +3,8 @@ import { Client } from 'rpc-websockets'
 const CONNECT_TIMEOUT_MS = 8000
 
 let seq = 0
-const nextRequestId = () => {
-  seq = (seq + 1) >>> 0
-  return seq * 0x100000 + Math.floor(Math.random() * 0x100000)
-}
+const nextRequestId = () =>
+  `${++seq}-${Date.now()}-${Math.floor(Math.random() * 1_000_000)}`
 
 export class RpcClient {
   private token: string
